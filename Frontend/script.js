@@ -34,8 +34,12 @@ function resetImage() {
 function uploadFile(file) {
   const formData = new FormData();
   formData.append("file", file);
+  formData.append("item_id", 1);
+  formData.append("imagename", file.name);
+  formData.append("latitude", 0);
+  formData.append("longitude", 0);
 
-  fetch("/upload-endpoint", {
+  fetch("http://127.0.0.1:8000/upload_image/", {
     method: "POST",
     body: formData,
   })
