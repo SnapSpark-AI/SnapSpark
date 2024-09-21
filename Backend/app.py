@@ -16,8 +16,11 @@ MONGO = os.environ['MONGODB_URI']
 def read_root():
     return {"Hello": "World"}
 
-@app.get("/sourceimages/{item_id}")
-def read_item(item_id: int, imagename: string, latitude: float, longitude: float):
+@app.get("/imagesources/{item_id}")
+def read_item(item_id: int, 
+              imagename: string, 
+              latitude: float, 
+              longitude: float):
     return {
         "item_id": item_id, 
         "imagename": imagename,
@@ -25,9 +28,16 @@ def read_item(item_id: int, imagename: string, latitude: float, longitude: float
         "longitude": longitude
     }
     
-@app.get("/sourceimages/{item_id}")
-def read_item(instantaneous_temperature: float, instantaneous_humidity: int):
+@app.get("/location_info/{item_id}")
+def read_item(item_id: int, 
+              latitude: str, 
+              longitude: str, 
+              instantaneous_temperature: float, 
+              instantaneous_humidity: int):
     return {
+        "item_id": item_id,
+        "latitude": latitude,
+        "longitude": longitude,
         "instantaneous_temperature": instantaneous_temperature,
         "instantaneous_humidity": instantaneous_humidity
     }
