@@ -16,15 +16,19 @@ CONNECTION_STRING = os.environ['MONGODB_URI']
 def read_root():
     return {"Hello": "World"}
 
-
-@app.get("/crowdsource/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
+@app.get("/sourceimages/{item_id}")
+def read_item(item_id: int, latitude: float, longitude: float):
     return {
         "item_id": item_id, 
-        "stateorprovince": stateorprovince, 
-        "city": city, 
         "latitude": latitude, 
         "longitude": longitude
+    }
+    
+@app.get("/sourceimages/{item_id}")
+def read_item(instantaneous_temperature: float, instantaneous_humidity: int):
+    return {
+        "instantaneous_temperature": instantaneous_temperature,
+        "instantaneous_humidity": instantaneous_humidity
     }
 
 if __name__ == "__main__":
