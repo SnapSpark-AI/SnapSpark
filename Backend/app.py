@@ -9,6 +9,11 @@ import shutil
 import subprocess
 import PIL.Image
 import PIL.ExifTags
+import logging
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # NOTE: Always store API keys as environment variables
 PORT = int(sys.argv[1])
@@ -18,12 +23,10 @@ origins = ["http://localhost:3000"]
 app = FastAPI()
 mongo_uri = "mongodb://" + os.getenv("MONGO_USR") + ":" + urllib.parse.quote(os.getenv("MONGO_PASS")) + "@127.0.0.1:27001/"
 
-weather_api = os.getenv("WEATHER_API_DEFAULT")
-
 client = AsyncIOMotorClient(mongo_uri)
 db = client.myDatabase
-print(client.list_database_names())
-print(db.list_collection_names())
+logger.info(f"Connected to MongoDB, databases: {client.list_database_names()}")
+
 UPLOAD_DIR = "uploaded_images"
 if not os.path.exists(UPLOAD_DIR):
     os.makedirs(UPLOAD_DIR)
@@ -38,6 +41,7 @@ app.add_middleware(
 
 @app.get("/")
 async def read_root():
+    logger.info("Root endpoint accessed")
     return {"x": "y"}
 
 @app.post("/upload_image/")
@@ -48,28 +52,12 @@ async def upload_image(
     longitude: float = Form(...), 
     file: UploadFile = File(...)
 ):
-
-    file_location = f"{UPLOAD_DIR}/{file.filename}"
+    logger.info(f"Uploading image: {imagename} with item_id: {item_id}, latitude: {latitude}, longitude: {longitude}")
+    
+    file_location = os.path.join(UPLOAD_DIR, file.filename)
     with open(file_location, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
-
-    imagename = file.filename
-    img = PIL.Image.open(imagename)
-    exif = {
-        PIL.ExifTags.TAGS[k]: v
-        for k, v in img._getexif().items
-        if k in PIL.ExifTags.TAGS
-    }
     
-    north = exif['GPSinfo'][2]
-    east = exif['GPSinfo'][4]
-    
-    latitude = (((north[0]*60)+north[1]*60)+north[2])/60/60
-    longitude = (((east[0]*60)+east[1]*60)+east[2])/60/60
-
-    file_location = subprocess.run(['pwd'], capture_output=True, text=True)
-    file_location = file_location.stdout
-
     mongodb_document = {
         "item_id": item_id,
         "imagename": imagename,
@@ -77,21 +65,27 @@ async def upload_image(
         "longitude": longitude,
         "file_path": file_location
     }
-    
+
     result = await db.imagesources.insert_one(mongodb_document)
     
     if result.acknowledged:
+        logger.info(f"Image and metadata added successfully for item_id: {item_id}")
         return {"message": "Image and metadata added successfully", "item_id": item_id}
     else:
+        logger.error("Failed to insert document into MongoDB")
         raise HTTPException(status_code=500, detail="Failed to insert document")
 
 @app.get("/imagesources/{item_id}")
 async def read_image_source(item_id: int):
+    logger.info(f"Fetching image source for item_id: {item_id}")
     doc = await db.imagesources.find_one({"item_id": item_id})
     if doc:
+        logger.info(f"Image source found for item_id: {item_id}")
         return doc
     else:
+        logger.warning(f"Item not found for item_id: {item_id}")
         raise HTTPException(status_code=404, detail="Item not found")
 
 if __name__ == "__main__":
+    logger.info(f"Starting FastAPI server on http://127.0.0.1:{PORT}")
     uvicorn.run(app, host="127.0.0.1", port=PORT)
