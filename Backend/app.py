@@ -18,6 +18,8 @@ origins = ["http://localhost:3000"]
 app = FastAPI()
 mongo_uri = "mongodb://" + os.getenv("MONGO_USR") + ":" + urllib.parse.quote(os.getenv("MONGO_PASS")) + "@127.0.0.1:27001/"
 
+weather_api = os.getenv("WEATHER_API_DEFAULT")
+
 client = AsyncIOMotorClient(mongo_uri)
 db = client.myDatabase
 print(client.list_database_names())
