@@ -1,11 +1,32 @@
 body {
-  font-family: Arial, sans-serif;
-  display: flex;
+  font-family: Pontano Sans, sans-serif;
   justify-content: center;
   align-items: center;
   height: 100vh;
   background-color: #f5f5f5;
   margin: 0;
+}
+
+.navbar {
+  color: #EE8301;
+  padding: 10px;
+}
+
+.navbar-nav {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.navbar-brand, .navbar-item {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.container-fluid {
+  padding: 20px;
+  background-color: #EE8301;
 }
 
 .container {
