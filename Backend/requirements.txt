@@ -2,3 +2,4 @@ uvicorn[standard]
 fastapi[standard]
 motor[srv]
 pymongo[srv]
+pyopenssl
