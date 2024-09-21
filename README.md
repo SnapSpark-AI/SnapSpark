@@ -1,2 +1,2 @@
 PennApps-XXV Sustainability Challenge
-A full-stack Webapp intergrating with AI to predict the wildfire in the North America
+A full-stack Webapp intergrating with AI to predict wildfires in North America
