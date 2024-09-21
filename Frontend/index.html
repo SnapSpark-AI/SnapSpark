@@ -10,7 +10,7 @@
     <div class="container">
       <h2>Fire Wire</h2>
       <div class="main">
-        <div class="upload-box">
+        <div class="upload-box" id="upload-box">
           <input
             type="file"
             id="file-upload"
@@ -18,6 +18,10 @@
             onchange="displayImage(event)"
           />
           <label for="file-upload" class="upload-label">Upload</label>
+          <!-- Close Icon (Hidden initially) -->
+          <span class="close-icon" id="close-icon" onclick="resetImage()"
+            >&#10006;</span
+          >
         </div>
         <div class="output-placeholder">
           <div id="output">Output</div>

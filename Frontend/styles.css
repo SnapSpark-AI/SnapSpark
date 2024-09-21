@@ -40,6 +40,7 @@ h2 {
   height: 200px;
   border-radius: 8px;
   cursor: pointer;
+  position: relative;
 }
 
 .upload-label {
@@ -58,4 +59,15 @@ h2 {
 
 #output {
   margin-top: 10px;
+}
+
+/* Close Icon */
+.close-icon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 20px;
+  color: red;
+  cursor: pointer;
+  display: none; /* Hidden initially */
 }
