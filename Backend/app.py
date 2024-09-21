@@ -1,4 +1,8 @@
 from fastapi import FastAPI
+import sys
+import os
+
+# NOTE: Always store API keys as environment variables
 
 app = FastAPI()
 
