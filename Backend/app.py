@@ -1,6 +1,8 @@
 from fastapi import FastAPI, HTTPException
 from motor.motor_asyncio import AsyncIOMotorClient
 import uvicorn
+import urllib
+import pymongo
 import sys
 import os
 
@@ -8,10 +10,9 @@ import os
 PORT = int(sys.argv[1])
 
 app = FastAPI()
+mongo_uri = "mongodb://" + os.getenv("MONGO_USR") + ":" + urllib.parse.quote(os.getenv("MONGO_PASS")) + "@127.0.0.1:27001/"
 
-MONGO_URI = os.getenv('MONGODB_URI')
-
-client = AsyncIOMotorClient(MONGO_URI)
+client = AsyncIOMotorClient(mongo_uri)
 db = client.myDatabase
 
 @app.get("/")
