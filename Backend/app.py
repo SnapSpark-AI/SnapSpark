@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from motor.motor_asyncio import AsyncIOMotorClient
 import uvicorn
 import sys
 import os
@@ -8,6 +9,8 @@ import os
 PORT = int(sys.argv[1])
 
 app = FastAPI()
+
+CONNECTION_STRING = os.environ['MONGODB_URI']
 
 @app.get("/")
 def read_root():
