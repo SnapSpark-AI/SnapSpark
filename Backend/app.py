@@ -42,10 +42,6 @@ async def read_root():
 
 @app.post("/upload_image/")
 async def upload_image(
-    item_id: int = Form(...), 
-    imagename: str = Form(...), 
-    latitude: float = Form(...), 
-    longitude: float = Form(...), 
     file: UploadFile = File(...)
 ):
 
