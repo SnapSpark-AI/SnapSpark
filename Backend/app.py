@@ -10,16 +10,17 @@ PORT = int(sys.argv[1])
 
 app = FastAPI()
 
-CONNECTION_STRING = os.environ['MONGODB_URI']
+MONGO = os.environ['MONGODB_URI']
 
 @app.get("/")
 def read_root():
     return {"Hello": "World"}
 
 @app.get("/sourceimages/{item_id}")
-def read_item(item_id: int, latitude: float, longitude: float):
+def read_item(item_id: int, imagename: string, latitude: float, longitude: float):
     return {
         "item_id": item_id, 
+        "imagename": imagename,
         "latitude": latitude, 
         "longitude": longitude
     }
