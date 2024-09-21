@@ -1,13 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Name Here</title>
-</head>
-<body>
-    
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fire Wire</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Fire Wire</h2>
+      <div class="main">
+        <div class="upload-box">
+          <input
+            type="file"
+            id="file-upload"
+            accept="image/*"
+            onchange="displayImage(event)"
+          />
+          <label for="file-upload" class="upload-label">Upload</label>
+        </div>
+        <div class="output-placeholder">
+          <div id="output">Output</div>
+        </div>
+      </div>
+    </div>
 
-    
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
