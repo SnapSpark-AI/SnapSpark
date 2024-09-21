@@ -47,3 +47,4 @@ function uploadFile(file) {
       console.error("Error uploading file:", error);
     });
 }
+
