@@ -1,12 +1,16 @@
-FROM ubuntu:22.04
+FROM python:3.9
 
 EXPOSE 8080
 
-WORKDIR $HOME
+WORKDIR /app
 
 COPY app.py .
 
-RUN chmod +x $HOME/app.py
+RUN chmod +x /app/app.py
 
-RUN ["python3 app.py 8080"]
+CMD ["pip", "install", "-r", "/app/requirements.txt"]
+
+CMD ["apt", "install", "python3-all"]
+
+CMD ["python3", "/app/app.py", "8080"]
 
