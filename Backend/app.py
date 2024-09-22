@@ -7,7 +7,7 @@ import mysql.connector
 import sys
 import os
 import shutil
-import requests
+from cerebras.cloud.sdk import Cerebras
 import httpx
 from PIL import Image, ExifTags
 from PIL.ExifTags import TAGS, GPSTAGS
@@ -174,5 +174,31 @@ async def upload_image(
 async def get_value():
     return {"value": prediction_val}
 
+global cerebras_response
+
+@app.post("/put_address")
+async def put_address(
+    address: UploadFile = File(...)
+):
+    client = Cerebras(
+    # This is the default and can be omitted
+    api_key=os.environ.get("CEREBRAS_API_KEY"),
+    )
+    prompt = "What are some wildfire safety precautions, if any, for someone living at "+address
+    completion = client.chat.completions.create(
+        messages=[
+            {
+                "role": "user",
+                "content": prompt,
+            }
+        ],
+        model="llama3.1-8b",
+    )
+    cerebras_response = completion
+    
+@app.gets("/ai-result")
+async def get_value():
+    return {"response": cerebras_response}
+    
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=PORT)
