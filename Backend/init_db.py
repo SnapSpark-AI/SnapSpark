@@ -1,6 +1,8 @@
 import mysql.connector
 import os
 
+
+
 mydb = mysql.connector.connect(
     host="localhost",
     user=os.getenv("MYSQL_USR"),
@@ -9,4 +11,15 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 
-mycursor.execute("CREATE TABLE coordinates (filename VARCHAR(255), latitude VARCHAR(255), longitude VARCHAR(255))")
+mycursor.execute("CREATE DATABASE firedb")
+
+mydb = mysql.connector.connect(
+    host="localhost",
+    user=os.getenv("MYSQL_USR"),
+    password=os.getenv("MYSQL_PASS"),
+    database="firedb"
+)
+
+mycursor = mydb.cursor()
+
+mycursor.execute("CREATE TABLE conditions (filename VARCHAR(255), temperature VARCHAR(255), humidity VARCHAR(255), weather_speed VARCHAR(255))")
