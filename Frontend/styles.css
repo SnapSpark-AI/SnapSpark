@@ -10,6 +10,11 @@ html, body {
 .card {
   width: 18rem;
   height: 10px;
+  transition: 1s;
+}
+
+.card:hover {
+  width: 26rem;
 }
 
 .container {
