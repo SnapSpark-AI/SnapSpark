@@ -1,12 +1,8 @@
 # 🔥 SnapSpark
-
-Crowdsourced AI prediction of wildfires at scale.
-
-(amy or freddie pls make the description :P i suck at this type of writing)
+We developed SnapSpark, an AI-powered wildfire prediction platform that relies on crowdsourced data from images. SnapSpark allows users to upload images of their surroundings, receive predictions, and interact with our map visuals. Our machine learning image analysis is combined with geolocation and environmental data, enabling rapid identification and response to emerging fire threats. SnapSpark makes it easy for anyone, anywhere, to be part of the solution, helping to protect people, property, and the environment.
 
 # 🫡 Our Mission
-
-
+Our team, driven by a deep concern for both the environment and the safety of our homes, is tackling one of the most pressing natural disaster issues of our time: wildfires. Every year, these infernos ravage 4 to 5 million square kilometers of land globally, releasing a staggering 339 million tons of CO₂ into the atmosphere. While climate change is fuelling the threat of wildfires, the impact of wildfires goes far beyond the environment, simultaneously threatening the safety of our homes and communities. To combat this crisis, we're not only working to develop more accurate and reliable wildfire prediction tools, but we're also incentivizing community members to help us prevent and predict wildfires. Together, we can build a network of vigilant community members, empowered to make a difference.
 
 # 🖥️ Software Layout + File Roles and Specifications
 
