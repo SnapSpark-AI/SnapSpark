@@ -3,3 +3,6 @@ fastapi[standard]
 motor[srv]
 pymongo[srv]
 pyopenssl
+mysql-connector-python
+httpx
+pillow
