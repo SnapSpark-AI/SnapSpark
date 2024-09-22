@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException, File, UploadFile, Form
 from motor.motor_asyncio import AsyncIOMotorClient
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
+import mysql.connector
 import urllib
 import sys
 import os
@@ -58,23 +59,34 @@ async def upload_image(
     }
     north = exif['GPSinfo'][2]
     east = exif['GPSinfo'][4]
-    latitude = (((north[0]*60)+north[1]*60)+north[2])/60/60
-    longitude = (((east[0]*60)+east[1]*60)+east[2])/60/60
+    latitude = str((((north[0]*60)+north[1]*60)+north[2])/60/60)
+    longitude = str((((east[0]*60)+east[1]*60)+east[2])/60/60)
     os.chdir("uploaded_images")
     file_location = subprocess.run(['pwd'], capture_output=True, text=True)
     file_location = file_location.stdout
-    mongo_store = {
-        "imagename": imagename,
-        "latitude": latitude,
-        "longitude": longitude,
-        "file_location": file_location
-    }
-    result = await db.imagesources.insert_one(mongo_store)
+    mydb = mysql.connector.connect(
+        host="localhost",
+        user=os.getenv("MYSQL_USR"),
+        password=os.getenv("MYSQL_PASS"),
+    )
+    mycursor = mydb.cursor()
+
+    mycursor.execute("CREATE DATABASE firedb")
     
-    if result.acknowledged:
-        return {"message": "Image and metadata added successfully"}
-    else:
-        raise HTTPException(status_code=500, detail="Failed to insert document")
+    mydb = mysql.connector.connect(
+        host="localhost",
+        user=os.getenv("MYSQL_USR"),
+        password=os.getenv("MYSQL_PASS"),
+        database="firedb"
+    )
+
+    mycursor = mydb.cursor()
+
+    mycursor.execute("CREATE TABLE coordinates (filename VARCHAR(255), latitude VARCHAR(255), longitude VARCHAR(255))")
+
+    sql = "INSERT INTO coordinates (filename, latitude, longitude) VALUES (%s, %s, %s)"
+    val = (file.filename, latitude, longitude)
+    mycursor.execute(sql, val)
 
 @app.get("/imagesources/{imagename}")
 async def read_image_source(imagename: str):
