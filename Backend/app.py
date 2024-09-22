@@ -48,15 +48,6 @@ async def upload_image(
     file_location = f"{UPLOAD_DIR}/{file.filename}"
     with open(file_location, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
-
-
-    mongodb_document = {
-        "item_id": item_id,
-        "imagename": imagename,
-        "latitude": latitude,
-        "longitude": longitude,
-        "file_path": file_location
-    }
     
     result = await db.imagesources.insert_one(mongodb_document)
     
