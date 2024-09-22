@@ -12,12 +12,12 @@ func loggingMiddleware(next http.Handler) http.Handler {
 
         rw := &responseWriter{w, http.StatusOK}
 
-        log.Printf("Received request: %s %s from %s", r.Method, r.URL.Path, r.RemoteAddr)
-        log.Printf("Request Headers: %+v", r.Header)
+        log.Printf("Received request: %s %s from %s 🟢", r.Method, r.URL.Path, r.RemoteAddr)
+        log.Printf("Request Headers: %+v 🟢", r.Header)
 
         next.ServeHTTP(rw, r)
 
-        log.Printf("Responded with status: %d in %v", rw.statusCode, time.Since(start))
+        log.Printf("Responded with status: %d in %v 🟢", rw.statusCode, time.Since(start))
     })
 }
 
@@ -35,7 +35,7 @@ func main() {
     fs := http.FileServer(http.Dir("."))
     http.Handle("/", loggingMiddleware(fs))
 
-    log.Println("Serving on http://localhost:3000")
+    log.Println("Serving on http://localhost:3000 🟢")
     err := http.ListenAndServe(":3000", nil)
     if err != nil {
         log.Fatal(err)
