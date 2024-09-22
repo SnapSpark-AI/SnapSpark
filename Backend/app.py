@@ -118,7 +118,7 @@ async def upload_image(
 
 @app.get("/weather/")
 async def get_weather(latitude: float, longitude: float):
-    api_key = "ef323bca1bdea4d965f9969216d7f2be"
+    api_key = os.getenv("WEATHER_KEY")
     
     params = {
         "lat": latitude,
