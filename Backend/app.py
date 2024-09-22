@@ -196,7 +196,7 @@ async def put_address(
     )
     cerebras_response = completion
     
-@app.gets("/ai-result")
+@app.get("/ai-result")
 async def get_value():
     return {"response": cerebras_response}
     
