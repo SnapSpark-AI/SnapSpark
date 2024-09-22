@@ -82,17 +82,14 @@ async def read_root():
 async def upload_image(
     file: UploadFile = File(...)
 ):
-
     file_location = f"/home/shubs/hackathon/SnapSpark/Backend/{UPLOAD_DIR}/{file.filename}"
     with open(file_location, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
-    
-    imagename = "/home/shubs/hackathon/SnapSpark/Backend/uploaded_images/" + file.filename
+
+    imagename = f"/home/shubs/hackathon/SnapSpark/Backend/{UPLOAD_DIR}/" + file.filename
     latitude, longitude = get_lat_long(imagename)
-    os.chdir("uploaded_images")
-    file_location = subprocess.run(['pwd'], capture_output=True, text=True)
-    file_location = file_location.stdout
-    
+
+    # Insert into coordinates table
     mydb = mysql.connector.connect(
         host="localhost",
         user=os.getenv("MYSQL_USR"),
@@ -101,14 +98,13 @@ async def upload_image(
     )
 
     mycursor = mydb.cursor()
-
     sql = "INSERT INTO coordinates (filename, latitude, longitude) VALUES (%s, %s, %s)"
     val = (file.filename, latitude, longitude)
     mycursor.execute(sql, val)
     mydb.commit()
-    mydb.close()
-    api_key = os.getenv("WEATHER_KEY")
     
+    # Get weather data
+    api_key = os.getenv("WEATHER_KEY")
     params = {
         "lat": latitude,
         "lon": longitude,
@@ -117,30 +113,28 @@ async def upload_image(
 
     async with httpx.AsyncClient() as client:
         response = await client.get(WEATHER_API_URL, params=params)
-        
-        if response.status_code == 200:
-            data = response.json()
-            return {
-                "temperature": data["main"]["temp"],
-                "weather": data["weather"][0]["description"],
-                "humidity": data["main"]["humidity"],
-                "wind_speed": data["wind"]["speed"]
-            }
-        else:
-            raise HTTPException(status_code=response.status_code, detail="Error fetching weather data")
-    mydb = mysql.connector.connect(
-        host="localhost",
-        user=os.getenv("MYSQL_USR"),
-        password=os.getenv("MYSQL_PASS"),
-        database="firedb"
-    )
-    
-    mycursor = mydb.cursor()
 
-    sql = "INSERT INTO conditions (filename, temperature, humidity, wind_speed) VALUES (%s, %s, %s, %s)"
-    val = (file.filename, temperature, humidity, wind_speed)
-    mycursor.execute(sql, val)
-    mydb.commit()
+    if response.status_code == 200:
+        data = response.json()
+        temperature = data["main"]["temp"]
+        weather_description = data["weather"][0]["description"]
+        humidity = data["main"]["humidity"]
+        wind_speed = data["wind"]["speed"]
+
+        sql = "INSERT INTO conditions (filename, temperature, humidity) VALUES (%s, %s, %s, %s)"
+        val = (file.filename, temperature, humidity, wind_speed)
+        mycursor.execute(sql, val)
+        mydb.commit()
+
+        mycursor.close()
+        mydb.close()
+
+        return {
+            "temperature": temperature,
+            "humidity": humidity,
+        }
+    else:
+        raise HTTPException(status_code=response.status_code, detail="Error fetching weather data")
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=PORT)
