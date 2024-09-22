@@ -98,8 +98,6 @@ async def upload_image(
         password=os.getenv("MYSQL_PASS"),
     )
     mycursor = mydb.cursor()
-
-    mycursor.execute("CREATE DATABASE firedb")
     
     mydb = mysql.connector.connect(
         host="localhost",
