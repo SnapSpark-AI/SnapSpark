@@ -83,7 +83,7 @@ async def upload_image(
     file: UploadFile = File(...)
 ):
 
-    file_location = f"{UPLOAD_DIR}/{file.filename}"
+    file_location = f"/home/shubs/hackathon/SnapSpark/Backend/{UPLOAD_DIR}/{file.filename}"
     with open(file_location, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
     
