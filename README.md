@@ -1,3 +1,3 @@
 # 🔥 SnapSpark
 
-Crowdsourced AI prediction of wildfires scale.
+Crowdsourced AI prediction of wildfires at scale.
