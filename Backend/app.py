@@ -21,6 +21,8 @@ app = FastAPI()
 
 WEATHER_API_URL = "https://api.openweathermap.org/data/2.5/weather"
 
+global prediction_val
+
 weather_api = os.getenv("WEATHER_API_DEFAULT")
 
 UPLOAD_DIR = "uploaded_images"
@@ -162,6 +164,15 @@ async def upload_image(
     )
 
     result = CLIENT.infer(imagename, model_id="snapspark/1")
+    confidence = float(result['predictions'][0]['confidence'])*100.0
+    if result['predictions'][0]['class'] == "Low Risk":
+        prediction_val = 100.0 - confidence
+    else:
+        prediction_val = confidence
+
+@app.gets("/result")
+async def get_value():
+    return {"value": prediction_val}
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=PORT)
