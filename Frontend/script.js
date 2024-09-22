@@ -35,7 +35,7 @@ function uploadFile(file) {
   const formData = new FormData();
   formData.append("file", file);
 
-  fetch("/upload_image", {
+  fetch("http://localhost:8000/upload_image", {
     method: "POST",
     body: formData,
   })
