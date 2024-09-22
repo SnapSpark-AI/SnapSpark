@@ -121,7 +121,7 @@ async def upload_image(
         humidity = data["main"]["humidity"]
         wind_speed = data["wind"]["speed"]
 
-        sql = "INSERT INTO conditions (filename, temperature, humidity) VALUES (%s, %s, %s, %s)"
+        sql = "INSERT INTO conditions (filename, temperature, humidity) VALUES (%s, %s, %s)"
         val = (file.filename, temperature, humidity, wind_speed)
         mycursor.execute(sql, val)
         mydb.commit()
