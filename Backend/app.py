@@ -145,30 +145,30 @@ async def upload_image(
         mycursor.execute(sql, val)
         mydb.commit()
 
-        mycursor.close()
-        mydb.close()
+        ROBO_API_KEY = os.getenv("ROBO_API_KEY")
 
-        return {
-            "temperature": temperature,
-            "humidity": humidity,
-            "wind_speed": wind_speed
-        }
+        CLIENT = InferenceHTTPClient(
+            api_url="https://classify.roboflow.com",
+            api_key=ROBO_API_KEY
+        )
+
+        result = CLIENT.infer(imagename, model_id="snapspark/1")
+        confidence = float(result['predictions'][0]['confidence'])*100.0
+        if result['predictions'][0]['class'] == "Low Risk":
+            prediction_val = 100.0 - confidence
+        else:
+            prediction_val = confidence
+
+            mycursor.close()
+            mydb.close()
+
+            return {
+                "temperature": temperature,
+                "humidity": humidity,
+                "wind_speed": wind_speed
+            }
     else:
         raise HTTPException(status_code=response.status_code, detail="Error fetching weather data")
-
-    ROBO_API_KEY = os.getenv("ROBO_API_KEY")
-
-    CLIENT = InferenceHTTPClient(
-        api_url="https://classify.roboflow.com",
-        api_key=ROBO_API_KEY
-    )
-
-    result = CLIENT.infer(imagename, model_id="snapspark/1")
-    confidence = float(result['predictions'][0]['confidence'])*100.0
-    if result['predictions'][0]['class'] == "Low Risk":
-        prediction_val = 100.0 - confidence
-    else:
-        prediction_val = confidence
 
 @app.get("/result")
 async def get_value():
