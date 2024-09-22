@@ -111,7 +111,7 @@ async def upload_image(
     sql = "INSERT INTO coordinates (filename, latitude, longitude) VALUES (%s, %s, %s)"
     val = (file.filename, latitude, longitude)
     mycursor.execute(sql, val)
-    
+    mydb.commit()
     api_key = os.getenv("WEATHER_KEY")
     
     params = {
@@ -145,6 +145,7 @@ async def upload_image(
     sql = "INSERT INTO conditions (filename, temperature, humidity, wind_speed) VALUES (%s, %s, %s, %s)"
     val = (file.filename, temperature, humidity, wind_speed)
     mycursor.execute(sql, val)
+    mydb.commit()
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=PORT)
