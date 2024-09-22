@@ -7,6 +7,7 @@ import sys
 import os
 import shutil
 import subprocess
+import httpx
 from PIL import Image, ExifTags
 from PIL.ExifTags import TAGS, GPSTAGS
 
@@ -16,6 +17,8 @@ PORT = int(sys.argv[1])
 origins = ["http://localhost:3000"]
 
 app = FastAPI()
+
+WEATHER_API_URL = "https://api.openweathermap.org/data/2.5/weather"
 
 weather_api = os.getenv("WEATHER_API_DEFAULT")
 
@@ -112,6 +115,30 @@ async def upload_image(
     sql = "INSERT INTO coordinates (filename, latitude, longitude) VALUES (%s, %s, %s)"
     val = (file.filename, latitude, longitude)
     mycursor.execute(sql, val)
+
+@app.get("/weather/")
+async def get_weather(latitude: float, longitude: float):
+    api_key = "ef323bca1bdea4d965f9969216d7f2be"
+    
+    params = {
+        "lat": latitude,
+        "lon": longitude,
+        "appid": api_key
+    }
+
+    async with httpx.AsyncClient() as client:
+        response = await client.get(WEATHER_API_URL, params=params)
+        
+        if response.status_code == 200:
+            data = response.json()
+            return {
+                "temperature": data["main"]["temp"],
+                "weather": data["weather"][0]["description"],
+                "humidity": data["main"]["humidity"],
+                "wind_speed": data["wind"]["speed"]
+            }
+        else:
+            raise HTTPException(status_code=response.status_code, detail="Error fetching weather data")
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=PORT)
