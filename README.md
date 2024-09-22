@@ -14,15 +14,15 @@ Crowdsourced AI prediction of wildfires at scale.
 
 | Software     | Role/Action   | Language |
 | ------------ | ------------- | -------- |
-| 🏎️ FastAPI  | Web Framework | 🐍Python |
+| ⚡FastAPI  | Web Framework | 🐍Python |
 | 🐬MySQL    | Database      | 🥪SQL    |
 | 🐳Docker   | Containment   | N/A      |
 | 🟠tune. AI | ?             | N/A      |
 | 🧠Cerebras | ?             | N/A      |
 
-| Software | Role/Action   | Language |
-| -------- | ------------- | -------- |
-|   | Web Framework | 🐍Python |
-| MySQL    | Database      | 🐬SQL    |
-| tune. AI | ?             | N/A      |
-| Cerebras | ?             | N/A      |
+| File             | Role                                    | Language |
+| ---------------- | --------------------------------------- | -------- |
+| app.py           | Contains main backend code, shot caller | 🐍Python |
+| init_db.py       | Database initializer for MySQL          | 🐍Python |
+| Dockerfile       | Software containment recipe             | N/A      |
+| requirements.txt | Python dependencies list                | N/A      |
