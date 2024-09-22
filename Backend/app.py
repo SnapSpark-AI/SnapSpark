@@ -170,7 +170,7 @@ async def upload_image(
     else:
         prediction_val = confidence
 
-@app.gets("/result")
+@app.get("/result")
 async def get_value():
     return {"value": prediction_val}
 
