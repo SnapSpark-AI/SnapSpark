@@ -20,7 +20,7 @@ Crowdsourced AI prediction of wildfires at scale.
 | 🟠tune. AI       | ?                                      | N/A      |
 | 🧠Cerebras       | ?                                      | N/A      |
 
-| File             | Role                                    | Language |
+| File             | Role/Action                                    | Language |
 | ---------------- | --------------------------------------- | -------- |
 | app.py           | Contains main backend code, shot caller | 🐍Python |
 | init_db.py       | Database initializer for MySQL          | 🐍Python |
