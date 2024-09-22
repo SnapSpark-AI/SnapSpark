@@ -12,10 +12,17 @@ Crowdsourced AI prediction of wildfires at scale.
 
 ## Backend
 
+| Software     | Role/Action   | Language |
+| ------------ | ------------- | -------- |
+| 🏎️ FastAPI  | Web Framework | 🐍Python |
+| 🐬MySQL    | Database      | 🥪SQL    |
+| 🐳Docker   | Containment   | N/A      |
+| 🟠tune. AI | ?             | N/A      |
+| 🧠Cerebras | ?             | N/A      |
+
 | Software | Role/Action   | Language |
 | -------- | ------------- | -------- |
-| FastAPI  | Web Framework | 🐍Python |
+|   | Web Framework | 🐍Python |
 | MySQL    | Database      | 🐬SQL    |
 | tune. AI | ?             | N/A      |
 | Cerebras | ?             | N/A      |
-
