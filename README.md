@@ -26,3 +26,16 @@ Crowdsourced AI prediction of wildfires at scale.
 | init_db.py       | Database initializer for MySQL          | 🐍Python |
 | Dockerfile       | Software containment recipe             | N/A      |
 | requirements.txt | Python dependencies list                | N/A      |
+
+## ⬆️ Frontend
+
+| Software          | Role/Action                           | Language |
+| ----------------- | ------------------------------------- | -------- |
+| 🥾Bootstrap       | Templating and Design Framework       | 🎨 CSS |
+
+| File             | Role/Action                             | Language |
+| ---------------- | --------------------------------------- | -------- |
+| script.js        | Communicates with the backend, provides UI | ☕ JavaScript|
+| server.go        | Simple HTTP server to host Frontend locally | 🦫 Go |
+| style.css       | Styling for index page                   | 🎨 CSS |
+| index.html      | Index page text and markup               | 📝 HTML  |
