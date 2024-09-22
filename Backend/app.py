@@ -159,14 +159,14 @@ async def upload_image(
         else:
             prediction_val = confidence
 
-            mycursor.close()
-            mydb.close()
+        mycursor.close()
+        mydb.close()
 
-            return {
-                "temperature": temperature,
-                "humidity": humidity,
-                "wind_speed": wind_speed
-            }
+        return {
+            "temperature": temperature,
+            "humidity": humidity,
+            "wind_speed": wind_speed
+        }
     else:
         raise HTTPException(status_code=response.status_code, detail="Error fetching weather data")
 
