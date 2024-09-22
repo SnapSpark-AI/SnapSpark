@@ -13,7 +13,7 @@ Our team, driven by a deep concern for both the environment and the safety of ou
 | ⚡FastAPI        | Web Framework                          | 🐍Python |
 | 🐬MySQL          | Database                               | 🥪SQL    |
 | 🐳Docker         | Containment                            | N/A      |
-| 🤖Roboflow       | CV analysis with about 10k images      | N/A      |
+| 🤖Roboflow       | CV model trained with 10k custom images | N/A      |
 | 🧠Cerebras       | GPT bot for website                    | N/A      |
 | 🌧️OpenWeatherMap | Temperature, humidity, and wind speed information per location |           |
 
