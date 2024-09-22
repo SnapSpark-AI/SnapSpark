@@ -12,37 +12,47 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg">
-      <div class="container-fluid">
-        <ul class="navbar-nav">
-          <li><a class="navbar-brand" href="#!">SnapSpark</a></li>
-          <li><a class="navbar-item" href="#!">Upload Images</a></li>
-          <li><a class="navbar-item" href="#!">Map</a></li>
-        </ul>
-      </div>
-    </nav>
 
-    <div class="container">
-      <div class="main">
-        <div class="upload-box" id="upload-box">
-          <input
-            type="file"
-            id="file-upload"
-            accept="image/*"
-            onchange="displayImage(event)"
-          />
-          <label for="file-upload" class="upload-label">Upload</label>
-          <!-- Close Icon (Hidden initially) -->
-          <span class="close-icon" id="close-icon" onclick="resetImage()"
-            >&#10006;</span
-          >
-        </div>
-        <div class="output-placeholder">
-          <div id="output">Output</div>
+    <div class="site-wrapper gradient-bg">
+      <div class="site-wrapper-inner">
+        <div class="container">
+          <div class="masthead clearfix">
+            <div class="container inner d-flex justify-content-between align-items-center">
+              <h3 class="masthead-brand"><img src="SnapSpark.svg" alt="SnapSpark Logo" class="navbar-logo"></h3>
+              <nav>
+                <ul class="nav masthead-nav">
+                  <li><a href="#">Upload Image</a></li>
+                  <li><a href="#">Map</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+          
+          <div class="container-fluid">
+            <div class= "main">
+              <div class="upload-box" id="upload-box">
+                <input
+                  type="file"
+                  id="file-upload"
+                  accept="image/*"
+                  onchange="displayImage(event)"
+                />
+                <label for="file-upload" class="upload-label"><img class = "upload-icon" src="Camera.svg" alt="Upload icon">Upload</label>
+                <!-- Close Icon (Hidden initially) -->
+                <span class="close-icon" id="close-icon" onclick="resetImage()"
+                  >&#10006;</span
+                >
+              </div>
+              <div class="output-placeholder">
+                <div id="output">Output</div>
+              </div>
+            </div>
+          </div>
+          <script src="script.js"></script>
         </div>
       </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js"></script>
-    <script src="script.js"></script>
+    
   </body>
 </html>
+
