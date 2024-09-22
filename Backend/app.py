@@ -92,12 +92,6 @@ async def upload_image(
     os.chdir("uploaded_images")
     file_location = subprocess.run(['pwd'], capture_output=True, text=True)
     file_location = file_location.stdout
-    mydb = mysql.connector.connect(
-        host="localhost",
-        user=os.getenv("MYSQL_USR"),
-        password=os.getenv("MYSQL_PASS"),
-    )
-    mycursor = mydb.cursor()
     
     mydb = mysql.connector.connect(
         host="localhost",
@@ -112,6 +106,7 @@ async def upload_image(
     val = (file.filename, latitude, longitude)
     mycursor.execute(sql, val)
     mydb.commit()
+    mydb.close()
     api_key = os.getenv("WEATHER_KEY")
     
     params = {
