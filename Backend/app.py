@@ -146,7 +146,7 @@ async def upload_image(
 
     mycursor.execute("CREATE TABLE conditions (filename VARCHAR(255), temperature VARCHAR(255), humidity VARCHAR(255), weather_speed VARCHAR(255))")
 
-    sql = "INSERT INTO coordinates (filename, latitude, longitude) VALUES (%s, %s, %s)"
+    sql = "INSERT INTO conditions (filename, temperature, humidity, wind_speed) VALUES (%s, %s, %s)"
     val = (file.filename, temperature, humidity, wind_speed)
     mycursor.execute(sql, val)
 
