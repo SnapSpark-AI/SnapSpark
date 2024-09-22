@@ -6,3 +6,4 @@ pyopenssl
 mysql-connector-python
 httpx
 pillow
+inference-sdk
