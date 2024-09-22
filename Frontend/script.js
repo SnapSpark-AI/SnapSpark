@@ -103,35 +103,27 @@ function fetchPredictionValue() {
 }
 
 async function fetchPredictionRoboflow() {
-  // Get the image name from the input field
   const imageName = document.getElementById("imageNameInput").value;
 
-  // Validate that the image name is provided
   if (!imageName) {
       alert("Please enter an image name!");
       return;
   }
 
-  // Build the request URL with the image name as a query parameter
   const url = `http://localhost:8000/result?imagename=${encodeURIComponent(imageName)}`;
 
   try {
-      // Fetch the prediction from the FastAPI backend
       const response = await fetch(url);
 
-      // Check if the response is OK (status code 200-299)
       if (!response.ok) {
           throw new Error("Network response was not OK");
       }
 
-      // Parse the JSON data from the response
       const data = await response.json();
 
-      // Check if there is an error in the response
       if (data.error) {
           alert("Error: " + data.error);
       } else {
-          // Display the prediction value on the webpage
           const predictionDisplay = document.getElementById("predictionDisplay");
           predictionDisplay.textContent = `Prediction Value: ${data.value}%`;
       }

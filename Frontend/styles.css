@@ -7,6 +7,12 @@ html, body {
   height: 100vh;
 }
 
+#datawrapper-vis-P15Xw {
+  width: 100%;
+  max-width: 800px; /* adjust as needed */
+  height: 600px; /* or use a percentage */
+}
+
 .card {
   width: 18rem;
   height: 10px;
