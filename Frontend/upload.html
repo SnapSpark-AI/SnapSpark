@@ -9,14 +9,14 @@
   </head>
 
   <body>
-    <div class="container-fluid gradient-bg">
+    <div class="container-fluid gradient-bg" style="height: 100vh;">
         <div class="masthead clearfix">
             <div class="container inner d-flex justify-content-between align-items-center">
               <h3 class="masthead-brand justify-content-between align-items-center"><a href="index.html"><img src="SnapSpark.svg" alt="SnapSpark Logo" class="navbar-logo"></a></h3>
               <nav>
                 <ul class="nav masthead-nav">
                   <li><a href="upload.html"><strong>Upload Image</strong></a></li>
-                  <li><a href="#"><strong>View Map</strong></a></li>
+                  <li><a href="mapview.html"><strong>View Map</strong></a></li>
                 </ul>
               </nav>
             </div>
@@ -25,14 +25,15 @@
           <div class="container-fluid">
             <div class="row">
                 <div class="col">
-                    <div class="upload-box justify-content-center" id="upload-box">
+                    <div class="upload-box align-items-right" id="upload-box">
                         <input
                           type="file"
                           id="file-upload"
                           accept="image/*"
                           onchange="displayImage(event)"
-                          />
-                        <label for="file-upload" class="upload-label"><img class = "upload-icon" src="Camera.svg" alt="Upload icon"><br><strong>Upload Here!</strong></label>
+                        />
+                        <label for="file-upload" class="upload-label"><img class = "upload-icon" src="Camera.svg" alt="Upload icon"></label>
+                        <p class="upload-label" style="color: #0A3051;"><strong>Upload here!</strong></p>
                         <!-- Close Icon (Hidden initially) -->
                         <span class="close-icon" id="close-icon" onclick="resetImage()">&#10006;</span>
                       </div>

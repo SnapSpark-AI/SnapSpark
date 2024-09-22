@@ -25,7 +25,7 @@ function resetImage() {
   const label = uploadBox.querySelector(".upload-label");
 
   // Reset the upload box to the initial state
-  uploadBox.style.backgroundImage = "none";
+  uploadBox.style.backgroundImage = "";
   label.style.display = "block";
   closeIcon.style.display = "none";
   fileInput.value = "";
