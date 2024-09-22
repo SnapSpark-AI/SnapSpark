@@ -115,9 +115,7 @@ async def upload_image(
     sql = "INSERT INTO coordinates (filename, latitude, longitude) VALUES (%s, %s, %s)"
     val = (file.filename, latitude, longitude)
     mycursor.execute(sql, val)
-
-@app.get("/weather/")
-async def get_weather(latitude: float, longitude: float):
+    
     api_key = os.getenv("WEATHER_KEY")
     
     params = {
@@ -139,6 +137,20 @@ async def get_weather(latitude: float, longitude: float):
             }
         else:
             raise HTTPException(status_code=response.status_code, detail="Error fetching weather data")
+    mydb = mysql.connector.connect(
+        host="localhost",
+        user=os.getenv("MYSQL_USR"),
+        password=os.getenv("MYSQL_PASS"),
+        database="firedb"
+    )
+    
+    mycursor = mydb.cursor()
+
+    mycursor.execute("CREATE TABLE conditions (filename VARCHAR(255), temperature VARCHAR(255), humidity VARCHAR(255), weather_speed VARCHAR(255))")
+
+    sql = "INSERT INTO coordinates (filename, latitude, longitude) VALUES (%s, %s, %s)"
+    val = (file.filename, temperature, humidity, wind_speed)
+    mycursor.execute(sql, val)
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=PORT)
