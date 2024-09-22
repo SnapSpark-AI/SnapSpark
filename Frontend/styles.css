@@ -17,13 +17,12 @@ html, body {
   margin-right: 10px;
 }
 
-
 .gradient-bg {
   background: linear-gradient(#FFE169, #EE8301);
 }
 
 .navbar-logo {
-  width: 200px;
+  width: 300px;
   height: auto;
   display: flex;
 }
