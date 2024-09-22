@@ -53,36 +53,6 @@ html, body {
   color: #ff3e04; /* Change color on hover */
 }
 
-/*
-.navbar-nav {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-}
-
-.container {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-}
-*/
-
-/*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  width: 500px;
-  height: 400px; 
-
-h2 {
-  margin-bottom: 20px;
-}
-
-.main {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 50px;
-}
-*/
-
 .upload-box {
   display: flex;
   flex-direction: column;
