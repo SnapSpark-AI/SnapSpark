@@ -21,7 +21,9 @@ app = FastAPI()
 
 WEATHER_API_URL = "https://api.openweathermap.org/data/2.5/weather"
 
-global prediction_val
+prediction_val = None
+
+cerebras_response = None
 
 weather_api = os.getenv("WEATHER_API_DEFAULT")
 
@@ -151,7 +153,7 @@ async def upload_image(
             api_url="https://classify.roboflow.com",
             api_key=ROBO_API_KEY
         )
-
+        global prediction_val
         result = CLIENT.infer(imagename, model_id="snapspark/1")
         confidence = float(result['predictions'][0]['confidence'])*100.0
         if result['predictions'][0]['class'] == "Low Risk":
@@ -174,8 +176,6 @@ async def upload_image(
 async def get_value():
     return {"value": prediction_val}
 
-global cerebras_response
-
 @app.post("/put_address")
 async def put_address(
     address: UploadFile = File(...)
@@ -194,6 +194,7 @@ async def put_address(
         ],
         model="llama3.1-8b",
     )
+    global cerebras_response
     cerebras_response = completion
     
 @app.get("/ai-result")
