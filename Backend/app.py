@@ -76,9 +76,9 @@ async def upload_image(
     else:
         raise HTTPException(status_code=500, detail="Failed to insert document")
 
-@app.get("/imagesources/{item_id}")
-async def read_image_source(item_id: int):
-    doc = await db.imagesources.find_one({"item_id": item_id})
+@app.get("/imagesources/{imagename}")
+async def read_image_source(imagename: str):
+    doc = await db.imagesources.find_one({"imagename": imagename})
     if doc:
         return doc
     else:
