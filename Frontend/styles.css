@@ -32,6 +32,11 @@ html, body {
   background-color: transparent;
 }
 
+.chat-box {
+  background-color: white;
+  padding: 20px;
+}
+
 .masthead-nav {
   list-style: none;
   display: flex;
