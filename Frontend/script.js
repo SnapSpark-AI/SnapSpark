@@ -64,3 +64,21 @@ function uploadAddress(address) {
       console.error("Error uploading address:", error);
     });
 }
+
+function displayResponse() {
+  fetch("http://localhost:8000/get_addresses")
+    .then((response) => response.json())
+    .then((data) => {
+      const addressList = document.getElementById("addressList");
+      addressList.innerHTML = "";
+
+      data.forEach((address) => {
+        const listItem = document.createElement("li");
+        listItem.textContent = address;
+        addressList.appendChild(listItem);
+      });
+    })
+    .catch((error) => {
+      console.error("Error fetching addresses:", error);
+    });
+}
