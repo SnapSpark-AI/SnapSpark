@@ -4,13 +4,13 @@ Crowdsourced AI prediction of wildfires at scale.
 
 (amy or freddie pls make the description :P i suck at this type of writing)
 
-# Our Mission
+# 🫡 Our Mission
 
 
 
-# Software Layout + File Roles and Specifications
+# 🖥️ Software Layout + File Roles and Specifications
 
-## Backend
+## ⬇️ Backend
 
 | Software          | Role/Action                           | Language |
 | ----------------- | ------------------------------------- | -------- |
@@ -20,7 +20,7 @@ Crowdsourced AI prediction of wildfires at scale.
 | 🟠tune. AI       | ?                                      | N/A      |
 | 🧠Cerebras       | ?                                      | N/A      |
 
-| File             | Role/Action                                    | Language |
+| File             | Role/Action                             | Language |
 | ---------------- | --------------------------------------- | -------- |
 | app.py           | Contains main backend code, shot caller | 🐍Python |
 | init_db.py       | Database initializer for MySQL          | 🐍Python |
