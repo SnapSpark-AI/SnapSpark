@@ -89,7 +89,6 @@ async def upload_image(
     imagename = f"/home/shubs/hackathon/SnapSpark/Backend/{UPLOAD_DIR}/" + file.filename
     latitude, longitude = get_lat_long(imagename)
 
-    # Connect to MySQL database
     mydb = mysql.connector.connect(
         host="localhost",
         user=os.getenv("MYSQL_USR"),
@@ -98,7 +97,6 @@ async def upload_image(
     )
     mycursor = mydb.cursor()
 
-    # Check if `coordinates` table exists and create if it doesn't
     mycursor.execute("""
         CREATE TABLE IF NOT EXISTS coordinates (
             id INT AUTO_INCREMENT PRIMARY KEY,
@@ -108,7 +106,6 @@ async def upload_image(
         )
     """)
     
-    # Insert into coordinates table
     sql = "INSERT INTO coordinates (filename, latitude, longitude) VALUES (%s, %s, %s)"
     val = (file.filename, latitude, longitude)
     mycursor.execute(sql, val)
@@ -131,7 +128,6 @@ async def upload_image(
         humidity = data["main"]["humidity"]
         wind_speed = data["wind"]["speed"]
 
-        # Check if `conditions` table exists and create if it doesn't
         mycursor.execute("""
             CREATE TABLE IF NOT EXISTS conditions (
                 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -142,7 +138,6 @@ async def upload_image(
             )
         """)
 
-        # Insert into conditions table
         sql = "INSERT INTO conditions (filename, temperature, humidity, wind_speed) VALUES (%s, %s, %s, %s)"
         val = (file.filename, temperature, humidity, wind_speed)
         mycursor.execute(sql, val)
