@@ -89,21 +89,31 @@ async def upload_image(
     imagename = f"/home/shubs/hackathon/SnapSpark/Backend/{UPLOAD_DIR}/" + file.filename
     latitude, longitude = get_lat_long(imagename)
 
-    # Insert into coordinates table
+    # Connect to MySQL database
     mydb = mysql.connector.connect(
         host="localhost",
         user=os.getenv("MYSQL_USR"),
         password=os.getenv("MYSQL_PASS"),
         database="firedb"
     )
-
     mycursor = mydb.cursor()
+
+    # Check if `coordinates` table exists and create if it doesn't
+    mycursor.execute("""
+        CREATE TABLE IF NOT EXISTS coordinates (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            filename VARCHAR(255),
+            latitude FLOAT,
+            longitude FLOAT
+        )
+    """)
+    
+    # Insert into coordinates table
     sql = "INSERT INTO coordinates (filename, latitude, longitude) VALUES (%s, %s, %s)"
     val = (file.filename, latitude, longitude)
     mycursor.execute(sql, val)
     mydb.commit()
     
-    # Get weather data
     api_key = os.getenv("WEATHER_KEY")
     params = {
         "lat": latitude,
@@ -121,7 +131,19 @@ async def upload_image(
         humidity = data["main"]["humidity"]
         wind_speed = data["wind"]["speed"]
 
-        sql = "INSERT INTO conditions (filename, temperature, humidity) VALUES (%s, %s, %s)"
+        # Check if `conditions` table exists and create if it doesn't
+        mycursor.execute("""
+            CREATE TABLE IF NOT EXISTS conditions (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                filename VARCHAR(255),
+                temperature FLOAT,
+                humidity FLOAT,
+                wind_speed FLOAT
+            )
+        """)
+
+        # Insert into conditions table
+        sql = "INSERT INTO conditions (filename, temperature, humidity, wind_speed) VALUES (%s, %s, %s, %s)"
         val = (file.filename, temperature, humidity, wind_speed)
         mycursor.execute(sql, val)
         mydb.commit()
@@ -132,6 +154,7 @@ async def upload_image(
         return {
             "temperature": temperature,
             "humidity": humidity,
+            "wind_speed": wind_speed
         }
     else:
         raise HTTPException(status_code=response.status_code, detail="Error fetching weather data")
