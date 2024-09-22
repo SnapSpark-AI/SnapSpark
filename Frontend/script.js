@@ -47,3 +47,20 @@ function uploadFile(file) {
       console.error("Error uploading file:", error);
     });
 }
+
+function uploadAddress(address) {
+  const formData = new FormData();
+  formData.append("address", address);
+
+  fetch("http://localhost:8000/put_address/", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Address uploaded successfully:", data);
+    })
+    .catch((error) => {
+      console.error("Error uploading address:", error);
+    });
+}
