@@ -66,7 +66,7 @@ function uploadAddress(address) {
 }
 
 function displayResponse() {
-  fetch("http://localhost:8000/get_addresses")
+  fetch("http://localhost:8000/ai-result")
     .then((response) => response.json())
     .then((data) => {
       const addressList = document.getElementById("addressList");
@@ -80,5 +80,24 @@ function displayResponse() {
     })
     .catch((error) => {
       console.error("Error fetching addresses:", error);
+    });
+}
+
+function fetchPredictionValue() {
+  fetch("http://localhost:8000/result")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      // Display the prediction value
+      console.log("Prediction Value:", data.value);
+      const predictionDisplay = document.getElementById("predictionDisplay");
+      predictionDisplay.textContent = `Prediction: ${data.value}`;
+    })
+    .catch((error) => {
+      console.error("Error fetching prediction value:", error);
     });
 }
