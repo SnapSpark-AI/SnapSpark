@@ -1,5 +1,29 @@
+html, body { 
+  height: 100%; margin: 0; 
+  background-color: #EE8301;
+}
+
+.full-page-container {
+  height: 100vh;
+  display: flex;
+}
+
+.card {
+  width: 18rem;
+  height: 10px;
+}
+
+.container {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.row, .justify-content-center {
+  background-color: #EE8301;
+}
+
 .gradient-bg {
-  background: linear-gradient(#ffc7b6, #ca2f00);
+  background: linear-gradient(#FFE169, #EE8301);
 }
 
 .navbar-logo {
@@ -36,17 +60,6 @@
   gap: 20px;
 }
 
-.navbar-brand, .navbar-item {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.container-fluid {
-  padding: 20px;
-  background-color: #EE8301;
-}
-
 .container {
   background-color: white;
   padding: 20px;
@@ -63,7 +76,6 @@ h2 {
   margin-bottom: 20px;
 }
 
-
 .main {
   display: flex;
   justify-content: space-between;
@@ -73,26 +85,27 @@ h2 {
 
 .upload-box {
   display: flex;
-  /* flex-direction: column;*/
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   border: 2px dashed #ccc;
+  background-color: #C6D7D9;
   padding: 20px;
-  /* width: 200px;
-  height: 200px; */
+  width: 250px;
+  height: 250px;
   border-radius: 8px;
   cursor: pointer;
-  position: relative;
+  /*  position: relative; */
 }
 
 .upload-icon {
-  width: 50px;
-  height: 50px;
+  width: 85px;
+  height: 85px;
 }
 
 .upload-label {
   cursor: pointer;
-  color: #007bff;
+  color: #0A3051;
   margin-top: 10px;
 }
 

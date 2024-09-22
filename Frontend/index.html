@@ -10,13 +10,12 @@
 
   <body>
     <div class="container-fluid gradient-bg">
-        <div class="container-fluid">
-          <div class="masthead clearfix">
+        <div class="masthead clearfix">
             <div class="container inner d-flex justify-content-between align-items-center">
-              <h3 class="masthead-brand justify-content-between align-items-center"><img src="SnapSpark.svg" alt="SnapSpark Logo" class="navbar-logo"></h3>
+              <h3 class="masthead-brand justify-content-between align-items-center"><a href="index.html"><img src="SnapSpark.svg" alt="SnapSpark Logo" class="navbar-logo"></a></h3>
               <nav>
                 <ul class="nav masthead-nav">
-                  <li><a href="#"><strong>Upload Image</strong></a></li>
+                  <li><a href="upload.html"><strong>Upload Image</strong></a></li>
                   <li><a href="#"><strong>View Map</strong></a></li>
                 </ul>
               </nav>
@@ -28,24 +27,44 @@
 
             <br>
 
-            <p class="text-center">SnapSpark is an <strong>AI-powered</strong>, <strong>crowdsourced</strong> wildfire prediction platform. Relying on users to upload images of their surroundings, our <strong>machine learning model</strong> provides <strong>real-time predictions</strong> to enable rapid response to fire threats. We aim to <strong>empower communities</strong> to take immediate action towards wildfire prediction and prevention, one snap at a time. </p>
+            <p class="container text-center">SnapSpark is an <strong>AI-powered</strong>, <strong>crowdsourced</strong> wildfire prediction platform. Relying on users to upload images of their surroundings, our <strong>machine learning model</strong> provides <strong>real-time predictions</strong> to enable rapid response to fire threats. We aim to <strong>empower communities</strong> to take immediate action towards wildfire prediction and prevention, one snap at a time. </p>
           </div>
-
           <br>
+          <br>
+          <br>
+          <br>
+    </div>
 
-          <div class="upload-box" id="upload-box">
-            <input
-              type="file"
-              id="file-upload"
-              accept="image/*"
-              onchange="displayImage(event)"
-              />
-            <label for="file-upload" class="upload-label"><img class = "upload-icon" src="Camera.svg" alt="Upload icon">Upload</label>
-            <!-- Close Icon (Hidden initially) -->
-            <span class="close-icon" id="close-icon" onclick="resetImage()">&#10006;</span>
-          </div>
-          <script src="script.js"></script>
+    <div class="container-fluid" style="background-color:  #EE8301;">
+      <div class="card justify-content-center">
+        <div class="card-body">
+          🔥 Wildfires burn approximately 4 to 5 million square kilometers of land globally each year.
         </div>
+      </div>
+
+      <br>
+
+      <div class="card justify-content-center">
+        <div class="card-body">
+          🌍 339 million tons of CO₂ are released into the atmosphere annually by wildfires, significantly contributing to climate change.
+        </div>
+      </div>
+
+      <br>
+
+      <div class="card justify-content-center">
+        <div class="card-body">
+          💸 Wildfires cost the U.S. $24 billion annually, including damage to property, firefighting costs, and health impacts due to air quality degradation.
+        </div>
+      </div>
+
+      <br>
+
+      <div class="card justify-content-center">
+        <div class="card-body">
+          👨‍👩‍👧‍👦 Community awareness campaigns have reduced fire incidents in high-risk areas by up to 35% in some regions.
+        </div>
+      </div>
     </div>
   </body>
 </html>
