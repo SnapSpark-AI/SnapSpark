@@ -49,8 +49,7 @@ async def upload_image(
     with open(file_location, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
     
-    imagename = file.filename
-    os.chdir("uploaded_images")
+    imagename = "uploaded_images/"+file.filename
     img = PIL.Image.open(imagename)
     exif = {
         PIL.ExifTags.TAGS[k]: v
