@@ -140,43 +140,6 @@
           </div>
         </div>
       </div>
-
-      <script>
-        // Simulate sending a message and updating the chat interface
-        function sendMessage() {
-          const message = document.getElementById('addressInput').value;
-          if (message.trim() === "") return;
-
-          // Create a new chat bubble for the user message
-          const chatBox = document.getElementById('chatBox');
-          const userMessage = document.createElement('div');
-          userMessage.className = 'chat-message user';
-          userMessage.innerText = message;
-          chatBox.appendChild(userMessage);
-
-          // Clear the input field
-          document.getElementById('addressInput').value = "";
-
-          // Simulate SparkChat response
-          setTimeout(() => {
-            const botMessage = document.createElement('div');
-            botMessage.className = 'chat-message sparkchat';
-            botMessage.innerText = "SparkChat: Thanks for your message!";
-            chatBox.appendChild(botMessage);
-            chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom of the chat
-          }, 1000);
-        }
-
-        function fetchPredictionValue() {
-          // This function will handle fetching and displaying the prediction
-          const chatBox = document.getElementById('chatBox');
-          const botMessage = document.createElement('div');
-          botMessage.className = 'chat-message sparkchat';
-          botMessage.innerText = "Fetching prediction data...";
-          chatBox.appendChild(botMessage);
-          chatBox.scrollTop = chatBox.scrollHeight;
-        }
-      </script>
     </div>
   </body>
 </html>
