@@ -1,12 +1,13 @@
 from fastapi import FastAPI, HTTPException, File, UploadFile, Form
 from motor.motor_asyncio import AsyncIOMotorClient
 from fastapi.middleware.cors import CORSMiddleware
+from inference_sdk import InferenceHTTPClient
 import uvicorn
 import mysql.connector
 import sys
 import os
 import shutil
-import subprocess
+import requests
 import httpx
 from PIL import Image, ExifTags
 from PIL.ExifTags import TAGS, GPSTAGS
@@ -153,7 +154,14 @@ async def upload_image(
     else:
         raise HTTPException(status_code=response.status_code, detail="Error fetching weather data")
 
+    ROBO_API_KEY = os.getenv("ROBO_API_KEY")
 
+    CLIENT = InferenceHTTPClient(
+        api_url="https://classify.roboflow.com",
+        api_key=ROBO_API_KEY
+    )
+
+    result = CLIENT.infer(imagename, model_id="snapspark/1")
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=PORT)
