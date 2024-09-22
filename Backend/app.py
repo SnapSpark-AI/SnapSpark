@@ -124,7 +124,6 @@ async def upload_image(
     if response.status_code == 200:
         data = response.json()
         temperature = data["main"]["temp"]
-        weather_description = data["weather"][0]["description"]
         humidity = data["main"]["humidity"]
         wind_speed = data["wind"]["speed"]
 
@@ -153,6 +152,8 @@ async def upload_image(
         }
     else:
         raise HTTPException(status_code=response.status_code, detail="Error fetching weather data")
+
+
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=PORT)
